@@ -1,0 +1,32 @@
+/* It must be return in run() method in service_contracts_list.py file */
+{
+    "services": [
+        /* ONE CONTRACT */
+        {
+            "id" : "INT",
+            // "blockchain_chain_file" : "BOOLEAN",
+            "number_of_user" : "INT",
+            "index" : 0, /* By default is zero. for each signed increased */
+            "users" : {
+                "user_(ID)" : {
+                    // "signed" : "BOOLEAN", /* This field is fill by application */
+                    "id" : "USER_ID",
+                    // "public_key": "STRING",
+                    "username" : "STRING"
+                }
+                /* Based on the number of users, there are user_() dictionaries */
+            },
+            "date_created" : {
+                "yaer": "",
+                "month": "",
+                "day": ""
+            },
+            "data" : {
+                /**/
+            },
+            // "signed" : "(FULL OR SIGNED OR NOT)" /* This field is fill by application */
+        }
+    ],
+    "token" : "USER TOKEN"
+}
+

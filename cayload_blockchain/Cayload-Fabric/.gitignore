@@ -1,0 +1,15 @@
+#Cayload-Fabric -------------------------------
+#----------------------------------------------
+*.gz
+*.txt
+*.json
+Cayload-Fabric/bin
+
+#Test-Network ---------------------------------
+test-network/addOrg3
+test-network/organizations
+test-network/channel-artifacts
+test-network/system-genesis-block
+
+#Application-API ------------------------------
+application_api/apiserver/node_modules

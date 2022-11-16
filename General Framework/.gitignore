@@ -1,0 +1,8 @@
+env
+commonCodes/__pycache__
+Login/__pycache__
+__pycache__
+*.bin
+*.pem
+pdfjs
+Service/contracts_pdf
