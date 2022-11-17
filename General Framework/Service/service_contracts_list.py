@@ -36,11 +36,22 @@ class GetContractListAndCheckSignedWorker(QObject):
                     "Content-Type": "application/json",
                     "Authorization": "Token {}".format(user_token)
                 }
-        time.sleep(0.01)        
-        contracts = requests.get(
-                        url=service_url, 
-                        headers=headers
-                    ).json()
+        payload = self.check_params()
+        if payload != False:
+            time.sleep(0.01)        
+            contracts = requests.get(
+                            url=service_url, 
+                            headers=headers,
+                            params=payload
+                        ).json()
+        else:
+            time.sleep(0.01)        
+            contracts = requests.get(
+                            url=service_url, 
+                            headers=headers,
+
+                        ).json()
+
         contracts = self.preprocess(data=contracts) # FOR EVALUATION AIR SUBSERVIS
         service_contracts = contracts['services']
         c_list = []
@@ -58,6 +69,19 @@ class GetContractListAndCheckSignedWorker(QObject):
                 if correspond_sign == 'NOT':
                     contract['signed'] = 'NOT'
         self.finished.emit(c_list)
+
+    def check_params(self):   
+
+        if service_keywords['params'] != "":
+            params = {}
+            for param in service_keywords['params']:
+                output, label = dataProcess_with_label(_login_result, service_keywords['params'])
+                params[param] = output
+            return params
+        else:
+            return False
+
+
 
     def read_user_type(self):
         with open('type.bin', 'r') as file:
@@ -297,8 +321,9 @@ class MyQWidgetItem(QtWidgets.QWidget):
         contract_detail.exec_()
 
 class service_list_dialog(QtWidgets.QDialog):
-    def __init__(self, widget, service, site_id):
-        global service_url, service_keywords, site_iid
+    def __init__(self, widget, service, site_id, login_result):
+        global service_url, service_keywords, site_iid, _login_result
+        _login_result = login_result
         service_url = service['url']
         site_iid = site_id
         contract_info = service['contract_info']
@@ -309,7 +334,8 @@ class service_list_dialog(QtWidgets.QDialog):
             "contract_info" : contract_info,
             "user_info" : user_info,
             "created_on" : created_on,
-            "data" : data
+            "data" : data,
+            "params" : service['params']
         }
 
         super(service_list_dialog, self).__init__(widget)

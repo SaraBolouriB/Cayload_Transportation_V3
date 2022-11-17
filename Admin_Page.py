@@ -24,8 +24,7 @@ class Ui_admin_page(QtWidgets.QDialog):
 
         landing_page.setObjectName("landing_page")
         landing_page.setEnabled(True)
-        # landing_page.resize(670, 540)
-        landing_page.resize(670, 560)
+        landing_page.resize(670, 540)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -79,7 +78,7 @@ class Ui_admin_page(QtWidgets.QDialog):
         self.verticalLayout_2.addWidget(self.frame)
         self.Admin_bar = QtWidgets.QTabWidget(self.centralwidget)
         self.Admin_bar.setEnabled(True)
-        self.Admin_bar.setMinimumSize(QtCore.QSize(650, 440))
+        self.Admin_bar.setMinimumSize(QtCore.QSize(650, 410))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -263,7 +262,6 @@ class Ui_admin_page(QtWidgets.QDialog):
         self.lineEdit_login_pass.setObjectName("lineEdit_login_pass")
         self.login_pass.addWidget(self.lineEdit_login_pass)
         self.verticalLayout_6.addLayout(self.login_pass)
-
         self.login_public = QtWidgets.QHBoxLayout()
         self.login_public.setObjectName("login_public")
         self.label_login_public = QtWidgets.QLabel(self.widget)
@@ -273,7 +271,6 @@ class Ui_admin_page(QtWidgets.QDialog):
         self.lineEdit_login_public.setObjectName("lineEdit_login_public")
         self.login_public.addWidget(self.lineEdit_login_public)
         self.verticalLayout_6.addLayout(self.login_public)
-
         self.line_5 = QtWidgets.QFrame(self.widget)
         self.line_5.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_5.setFrameShadow(QtWidgets.QFrame.Sunken)
@@ -399,17 +396,6 @@ class Ui_admin_page(QtWidgets.QDialog):
         self.lineEdit_URL_service.setObjectName("lineEdit_URL_service")
         self.URL_service.addWidget(self.lineEdit_URL_service)
         self.verticalLayout_4.addLayout(self.URL_service)
-
-        self.params = QtWidgets.QHBoxLayout()
-        self.params.setObjectName("params")
-        self.label_params = QtWidgets.QLabel(self.widget_3)
-        self.label_params.setObjectName("label_params")
-        self.params.addWidget(self.label_params)
-        self.lineEdit_params = QtWidgets.QLineEdit(self.widget_3)
-        self.lineEdit_params.setObjectName("lineEdit_params")
-        self.params.addWidget(self.lineEdit_params)
-        self.verticalLayout_4.addLayout(self.params)
-
         self.ServiceJSON = QtWidgets.QTabWidget(self.widget_3)
         self.ServiceJSON.setObjectName("ServiceJSON")
         self.ContractInformation = QtWidgets.QWidget()
@@ -578,17 +564,6 @@ class Ui_admin_page(QtWidgets.QDialog):
         self.lineEdit_serviceEdit_URL.setObjectName("lineEdit_serviceEdit_URL")
         self.serviceEdit_URL.addWidget(self.lineEdit_serviceEdit_URL)
         self.verticalLayout_5.addLayout(self.serviceEdit_URL)
-        
-        self.serviceEdit_params = QtWidgets.QHBoxLayout()
-        self.serviceEdit_params.setObjectName("serviceEdit_params")
-        self.label_serviceEdit_params = QtWidgets.QLabel(self.widget_4)
-        self.label_serviceEdit_params.setObjectName("label_serviceEdit_params")
-        self.serviceEdit_params.addWidget(self.label_serviceEdit_params)
-        self.lineEdit_serviceEdit_params = QtWidgets.QLineEdit(self.widget_4)
-        self.lineEdit_serviceEdit_params.setObjectName("lineEdit_serviceEdit_params")
-        self.serviceEdit_params.addWidget(self.lineEdit_serviceEdit_params)
-        self.verticalLayout_5.addLayout(self.serviceEdit_params)
-
         self.editServices = QtWidgets.QTabWidget(self.widget_4)
         self.editServices.setObjectName("editServices")
         self.ContractInfo = QtWidgets.QWidget()
@@ -734,7 +709,7 @@ class Ui_admin_page(QtWidgets.QDialog):
         self.label_8.setText(_translate("landing_page", "Data format which must be sent to the sever:"))
         self.label_login_username.setText(_translate("landing_page", "Username :"))
         self.label_login_pass.setText(_translate("landing_page", "Password  :"))
-        self.label_login_public.setText(_translate("landing_page", "User ID  :"))
+        self.label_login_public.setText(_translate("landing_page", "Public Key  :"))
         self.label_login_URL.setText(_translate("landing_page", "URL: "))
         self.login_submit.setText(_translate("landing_page", "Submit"))
         self.login_Edit.setText(_translate("landing_page", "Edit"))
@@ -748,9 +723,6 @@ class Ui_admin_page(QtWidgets.QDialog):
         self.add_new_service.setText(_translate("landing_page", "Add New Service"))
         self.label_service_name.setText(_translate("landing_page", "Service Name :"))
         self.label_URL_service.setText(_translate("landing_page", "URL :"))
-
-        self.label_params.setText(_translate("landing_page", "Parameters :"))
-        
         self.label_year.setText(_translate("landing_page", "Year :"))
         self.label_month.setText(_translate("landing_page", "Month :"))
         self.label_day.setText(_translate("landing_page", "Day :"))
@@ -771,7 +743,6 @@ class Ui_admin_page(QtWidgets.QDialog):
         self.label_chooseService.setText(_translate("landing_page", "Choose Service :"))
         self.label_serviceEdit_name.setText(_translate("landing_page", "Servece Name :"))
         self.label_serviceEdit_URL.setText(_translate("landing_page", "URL :"))
-        self.label_serviceEdit_params.setText(_translate("landing_page", "Parameters :"))
         self.label_edit_contractID.setText(_translate("landing_page", "Contract ID :"))
         self.label_edit_chainfile.setText(_translate("landing_page", "Chain File :"))
         self.label_edit_num.setText(_translate("landing_page", "Number of users :"))
@@ -820,6 +791,41 @@ class Ui_admin_page(QtWidgets.QDialog):
         print(result.json())
         
     def submit_service_info(self):
+        # name = str(self.lineEdit_service_name.text())
+        # url = str(self.lineEdit_URL_service.text())
+
+        # # Contract Info
+        # contract_id = self.lineEdit_contractID.text()
+        # file_chain = self.lineEdit_chainfile.text()
+        # num_of_user = self.lineEdit_number.text()
+        # contract_info = contract_id + ',' + file_chain + ',' + num_of_user
+
+        # # Creation Date
+        # year = self.lineEdit_year.text()
+        # month = self.lineEdit_month.text()
+        # day = self.lineEdit_day.text()
+        # creation_date = year + ',' + month + ',' + day
+
+        # # User Info
+        # user_id = self.lineEdit_service_userID.text()
+        # username = self.lineEdit_service_username.text()
+        # public_key = self.lineEdit_service_public.text()
+        # user_info = user_id + ',' + username + ',' + public_key
+
+        # # Whole Data
+        # data = str(self.textEdit_data.toPlainText())
+
+
+        # service_data_collection = {
+        #     "name" : name,
+        #     "url" : url,
+        #     "data" : data,
+        #     "contract_info" : contract_info,
+        #     "user_info" : user_info,
+        #     "created_on" : creation_date,
+        #     "site_id" : self.site_id
+        # }
+        # print(service_data_collection)
         service_data_collection = self.get_service_info_for_submit()
         service_url = "http://127.0.0.1:8000/service/"
         result = requests.post(
@@ -879,6 +885,9 @@ class Ui_admin_page(QtWidgets.QDialog):
             self.get_services_information()
             self.combobox_updated()
             self.text_updated_edit_service()
+            # self.lineEdit_6.setText("")
+            # self.lineEdit_7.setText("")
+            # self.lineEdit_8.setText("")
         print(result.json())
 
 # GET INFORMATION METHODS FROM UI ----------------------------------------------------------
@@ -908,7 +917,6 @@ class Ui_admin_page(QtWidgets.QDialog):
     def get_service_info_for_submit(self):
         name = self.lineEdit_service_name.text()
         url = self.lineEdit_URL_service.text()
-        params = self.lineEdit_params.text()
         
         # Contract Info
         contract_id = self.lineEdit_contractID.text()
@@ -934,7 +942,6 @@ class Ui_admin_page(QtWidgets.QDialog):
         edited_service_info = {
             "name" : name,
             "url" : url,
-            "params" : params,
             "data" : data,
             "created_on" : creation_date,
             "user_info" : user_info,
@@ -946,7 +953,6 @@ class Ui_admin_page(QtWidgets.QDialog):
     def get_service_info_for_edit(self):
         name = self.lineEdit_serviceEdit_name.text()
         url = self.lineEdit_serviceEdit_URL.text()
-        params = self.lineEdit_serviceEdit_params.text()
         
         # Contract Info
         contract_id = self.lineEdit_edit_contractID.text()
@@ -972,7 +978,6 @@ class Ui_admin_page(QtWidgets.QDialog):
         edited_service_info = {
             "name" : name,
             "url" : url,
-            "params" : params,
             "data" : data,
             "created_on" : creation_date,
             "user_info" : user_info,
@@ -1009,7 +1014,6 @@ class Ui_admin_page(QtWidgets.QDialog):
                 self._id_service_current = service['id']
                 self.lineEdit_serviceEdit_name.setText(service['name'])
                 self.lineEdit_serviceEdit_URL.setText(service['url'])
-                self.lineEdit_serviceEdit_params.setText(service['params'])
                 self.Edit_data.setText(service['data'])
 
                 creation_date = service['created_on'].split(',')
@@ -1038,7 +1042,6 @@ class Ui_admin_page(QtWidgets.QDialog):
         else:
             self.lineEdit_serviceEdit_name.setText("")
             self.lineEdit_serviceEdit_URL.setText("")
-            self.lineEdit_serviceEdit_params.setText("")
             self.Edit_data.setText("")
             
             self.lineEdit_edit_year.setText("")
@@ -1056,7 +1059,6 @@ class Ui_admin_page(QtWidgets.QDialog):
     def text_updated_service(self):
         self.lineEdit_service_name.setText("")
         self.lineEdit_URL_service.setText("")
-        self.lineEdit_params.setText("")
 
         # Contract Info
         self.lineEdit_contractID.setText("")
@@ -1080,7 +1082,6 @@ class Ui_admin_page(QtWidgets.QDialog):
     def text_updated_edit_service(self):
         self.lineEdit_serviceEdit_name.setText("")
         self.lineEdit_serviceEdit_URL.setText("")
-        self.lineEdit_serviceEdit_params.setText("")
 
         self.lineEdit_edit_contractID.setText("")
         self.lineEdit_edit_chainfile.setText("")

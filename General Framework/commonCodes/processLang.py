@@ -22,4 +22,3 @@ def dataProcess_with_label(full_data, keyword):
             output = output[0]
         label = key
     return output, label
-

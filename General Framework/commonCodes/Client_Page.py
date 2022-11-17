@@ -5,7 +5,7 @@ import os
 
 
 class Ui_client_dialog(QtWidgets.QDialog):
-    def __init__(self, site_id, username, company_name):
+    def __init__(self, site_id, username, company_name, login_result):
         super().__init__()
         client_Dialog = self
         self.row_index = 0
@@ -13,6 +13,7 @@ class Ui_client_dialog(QtWidgets.QDialog):
         self.button_map = {}
         self.username = username
         self.company_name = company_name
+        self.login_result = login_result
         self.site_id = site_id
         self._all_services = self.get_all_services(site_id=site_id)
         self.registered = os.path.exists('register.txt')
@@ -368,7 +369,7 @@ class Ui_client_dialog(QtWidgets.QDialog):
         button_name = self.sender().text()
         for service in self._all_services:
             if service['name'] == button_name:
-                self.service_dialog = service_list_dialog(widget=self, service=service, site_id=self.site_id)
+                self.service_dialog = service_list_dialog(widget=self, service=service, site_id=self.site_id, login_result=self.login_result)
                 self.service_dialog.show()
                 break
         

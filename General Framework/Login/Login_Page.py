@@ -181,16 +181,15 @@ class Ui_login_dialog(QtWidgets.QDialog):
                 req = self.check_connection(url=login_url,json=data, timeout=5, method='post')
                 site_result = req.json()
                 if req.status_code == 200:
-                    # --------------- PREPROCESS FOR FINDING PUBLIC KEY --------------- #
-                    # publicKey_val = self.process(data=site_result, keyword=login_json[2])
+                    # ---------------- PREPROCESS FOR FINDING USER ID ----------------- #
+                    _user_id = self.process(data=site_result, keyword=login_json[2])
                     # ----------------------------------------------------------------- #
                     self.landingPage.user_token = site_result['token']
-                    # self.landingPage.user_public_key = publicKey_val
                     self.save_token(site_result['token'])
                     self.save_user(username)
-                    self.save_id(site_result['customer']['id'])
+                    self.save_id(_user_id)
                     self.close()
-                    self.landingPage.show_client_page(site_id=result['site_id'], username=username ,company_name=site_name)
+                    self.landingPage.show_client_page(site_id=result['site_id'], username=username ,company_name=site_name, login_result=site_result)
                 else:
                     print(site_result)
             else:

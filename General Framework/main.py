@@ -257,8 +257,8 @@ class Ui_landing_page(QtWidgets.QMainWindow):
         self.admin_dialog = Ui_admin_page(site_id=site_id, login_id=login_id, blockchain_id=blockchain_id)
         self.admin_dialog.exec_()
 
-    def show_client_page(self, site_id, username, company_name):
-        self.client_dialog = Ui_client_dialog(site_id=site_id, username=username, company_name=company_name)
+    def show_client_page(self, site_id, username, company_name, login_result):
+        self.client_dialog = Ui_client_dialog(site_id=site_id, username=username, company_name=company_name, login_result=login_result)
         self.client_dialog.exec_()
 
     def show_caution(self):

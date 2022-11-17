@@ -13,6 +13,7 @@ class Site(models.Model):
 class Service(models.Model):
     name = models.CharField(default=None, max_length=50, unique=True, null=True, blank=True)
     url = models.CharField(default=None, max_length=200)
+    params = models.CharField(default=None, max_length=200)
     data = models.CharField(default=None, max_length=1000)
     created_on = models.CharField(default=None, max_length=200)
     user_info = models.CharField(default=None, max_length=200)
