@@ -16,7 +16,7 @@ class Ui_client_dialog(QtWidgets.QDialog):
         self.login_result = login_result
         self.site_id = site_id
         self._all_services = self.get_all_services(site_id=site_id)
-        self.registered = os.path.exists('register.txt')
+        self.registered = os.path.exists(str(self.username) + '.bin')
         self.setupUi(client_Dialog)
 
     def setupUi(self, client_dialog):
@@ -332,7 +332,7 @@ class Ui_client_dialog(QtWidgets.QDialog):
         }
         result = requests.post(url, data)
         if result.status_code == 200:
-            with open('register.txt', 'w') as file:
+            with open(str(self.username )+ '.bin', 'w') as file:
                 file.write("YES")
             self.pushButton_2.setEnabled(False)
 

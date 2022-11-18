@@ -269,15 +269,15 @@ class MyQWidgetItem(QtWidgets.QWidget):
         counter = 0
         flag = False
         uid = self.read_user_id()
-        index = data['index']
+        id = data['id']
         for user in data['users'].values():
             ch_uid = user['id']
+            index = str(id) + str(ch_uid)
             if self.check_signature(index):
                 if str(ch_uid) == str(uid):
                     flag = True
                 counter += 1
-        
-        if counter == data['number_of_user']:
+        if str(counter) == str(data['number_of_user']):
             return "FULL"
         elif flag == False:
             return "NOT"
@@ -297,8 +297,8 @@ class MyQWidgetItem(QtWidgets.QWidget):
 
     def get_blockchain_url(self, site_id):
         url = 'http://localhost:8000/blockchainn/' + str(site_id)
-        result = requests.get(url).json()
-
+        result = requests.get(url)
+        result = result.json()
         if result['url'][-1] != "/":
             result['url'] += "/"
         return result['url']

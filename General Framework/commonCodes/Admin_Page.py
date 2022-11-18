@@ -808,13 +808,14 @@ class Ui_admin_page(QtWidgets.QDialog):
 
     def submit_blockchain_info(self):
         blockchain_data_collection = self.get_blockchain_info()
-        blockchain_url = "http://127.0.0.1:8000/blockchain/"
+        blockchain_url = "http://127.0.0.1:8000/send_blockchain/"
 
         result = requests.post(
             url=blockchain_url,
             json=blockchain_data_collection
         )
-        if result.status_code == 200:
+        if result.status_code == 201:
+            print("here")
             self.submit_blockchain = True
             self.buttom_update()
         print(result.json())

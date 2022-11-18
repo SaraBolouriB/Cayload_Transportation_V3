@@ -33,6 +33,14 @@ class SiteView(viewsets.ViewSet):
             sitesName.append(site['siteName'])
         return Response(data=sitesName, status=SUCCEEDED_REQUEST)
 
+    def destroy(self, request, pk=None):
+        site = Site.objects.filter(id=pk)
+        if site.exists():
+            site.delete()
+            return Response("Done", status=SUCCEEDED_REQUEST)
+        else:
+            return Response("No Item", status=NOT_FOUND)
+
 class ServiceView(viewsets.ViewSet):
     
     def create(self, request):
@@ -88,17 +96,18 @@ class BlockchainView(viewsets.ViewSet):
     
     def create(self, request):
         blockchain_data = request.data
-        site_id = blockchain_data.pop('site_id')
+        
         
         data = BlockchainSerializer(data=blockchain_data)
-        if data.is_valid():
-            data.save()          
+        # site_id = blockchain_data.pop('site_id')
+        if data.is_valid():            
+            data.save()         
         else:
             return Response(data.errors, status=INVALID_DATA)
-
-        blockchain_id = Blockchian.objects.get(url=blockchain_data['url']).id
+        
+        blockchain_id = Blockchian.objects.get(url=blockchain_data['url'], site_id=blockchain_data['site_id']).id
         data_collection = {
-            'site' : site_id,
+            'site' : blockchain_data['site_id'],
             'blockchain' : blockchain_id
         }
         siteBlockchain = SiteBlockchainSerializer(data=data_collection)
