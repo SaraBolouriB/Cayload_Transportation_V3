@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin_login/', LoginView.as_view({'get':'login_admin'}), name='login_as_admin'),
     path('user_login/', LoginView.as_view({'get':'login_user'}), name='login_as_user'),
 
-    path('all_data/<int:site_id>', AllInfoView.as_view({'get' : 'list'}), name='get_all_data')
+    path('all_data/<int:site_id>', AllInfoView.as_view({'get' : 'list'}), name='get_all_data'),
+
+    path('send_email/', sendEmail.as_view({'post': 'success'}), name='sending_mail')
 ]

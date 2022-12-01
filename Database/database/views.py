@@ -5,6 +5,13 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+
+import yagmail
+import random
+import string
 
 INVALID_DATA = status.HTTP_400_BAD_REQUEST
 INCOMPLETE_DATA = status.HTTP_400_BAD_REQUEST
@@ -254,4 +261,32 @@ class AllInfoView(viewsets.ViewSet):
 
         return Response(all_info, status=SUCCEEDED_REQUEST)
 
+class sendEmail(viewsets.ViewSet):
 
+    @action(detail=True, methods=['POST'])
+    def success(self, request):
+        try:
+            print(request.data)
+            reciever = request.data['email']
+            code = self.get_random_string(6)
+            body = '''
+                Hello 
+                This is an email for verification. Please enter the following code to access the application.
+                The verification code is:  
+            ''' + code
+
+            yag = yagmail.SMTP('swe.boloori@gmail.com', 'ltfqrmigcunfdhap')
+            yag.send(reciever, 'Code Verification', body)
+            return Response(code, status=SUCCEEDED_REQUEST)
+
+        except Exception as e:
+            return Response("Email Address is wrong", status=INVALID_DATA)
+            
+        
+        
+
+    def get_random_string(self, length):
+        
+        letters = string.ascii_lowercase
+        result_str = ''.join(random.choice(letters) for i in range(length))
+        return result_str

@@ -1,5 +1,6 @@
 from .loginFailedDialog import Ui_login_failed_message_dialog
 from Signup.Signup_Page import Ui_signup_dialog
+from .Code_Verification import verficatoin_code_dialog
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import requests
@@ -138,9 +139,6 @@ class Ui_login_dialog(QtWidgets.QDialog):
         password = str(self.password_box.text())
         site_name = str(self.company.currentText())
 
-        # username = "saraboloori@yahoo.com"
-        # password = "s@CPass1376"
-        # site_name = "cayload-customer"
         if self.is_admin.isChecked():
             self.user_type = 'admin'
             url = 'http://127.0.0.1:8000/admin_login/'
@@ -162,7 +160,6 @@ class Ui_login_dialog(QtWidgets.QDialog):
                 self.exec_login_failed_message_dialog()
 
         else:
-            # self.landingPage.show_client_page(site_id=1, username='sara' ,company_name='university')
             self.user_type = 'user'
             url = 'http://127.0.0.1:8000/user_login/'
             json_data = {
@@ -189,7 +186,16 @@ class Ui_login_dialog(QtWidgets.QDialog):
                     self.save_user(username)
                     self.save_id(_user_id)
                     self.close()
-                    self.landingPage.show_client_page(site_id=result['site_id'], username=username ,company_name=site_name, login_result=site_result)
+                    self.vcode = verficatoin_code_dialog(
+                        email= username, 
+                        landing_page = self.landingPage, 
+                        site_id=result['site_id'], 
+                        username=username,
+                        company_name=site_name, 
+                        login_result=site_result
+                    )
+                    self.vcode.show()
+                    # self.landingPage.show_client_page(site_id=result['site_id'], username=username ,company_name=site_name, login_result=site_result)
                 else:
                     print(site_result)
             else:
@@ -274,6 +280,8 @@ class Ui_login_dialog(QtWidgets.QDialog):
         with open('token.bin', 'w') as file:
             file.write(str(token))
         file.close
+
+    # def is_eligible(self, )
 
     def exec_login_failed_message_dialog(self):
         self.login_failed_dialog = Ui_login_failed_message_dialog()
