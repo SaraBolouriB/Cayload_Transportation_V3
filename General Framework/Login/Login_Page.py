@@ -139,6 +139,9 @@ class Ui_login_dialog(QtWidgets.QDialog):
         password = str(self.password_box.text())
         site_name = str(self.company.currentText())
 
+        # username = "saraboloori@yahoo.com"
+        # password = "s@CPass1376"
+        # site_name = "cayload-customer"
         if self.is_admin.isChecked():
             self.user_type = 'admin'
             url = 'http://127.0.0.1:8000/admin_login/'
@@ -160,6 +163,7 @@ class Ui_login_dialog(QtWidgets.QDialog):
                 self.exec_login_failed_message_dialog()
 
         else:
+            # self.landingPage.show_client_page(site_id=1, username='sara' ,company_name='university')
             self.user_type = 'user'
             url = 'http://127.0.0.1:8000/user_login/'
             json_data = {
